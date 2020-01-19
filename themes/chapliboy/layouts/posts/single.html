@@ -1,0 +1,7 @@
+{{ partial "header.html" . }}
+  <hr>
+  <div class='title mont orange'>{{ .Title }}</div>
+  <div class='date'>{{ dateFormat "2 Jan, 2006" .Date }}</div>
+  {{ .Content }}
+  <hr>
+{{ partial "footer.html" . }}

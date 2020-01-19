@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>chapliboy</title>
+    <link>/</link>
+    <description>Recent content on chapliboy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 18 Jan 2020 10:06:06 +0530</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>cluegrid</title>
+      <link>/projects/cluegrid/</link>
+      <pubDate>Sat, 18 Jan 2020 10:06:06 +0530</pubDate>
+      
+      <guid>/projects/cluegrid/</guid>
+      <description>cluegrid is a web app to solve crosswords with a friend
+Link to app
+Link to source
+cluegrid was build in elm. It uses websockets for the real time collaborative aspects.</description>
+    </item>
+    
+    <item>
+      <title>nimbus</title>
+      <link>/projects/nimbus2018/</link>
+      <pubDate>Sat, 18 Jan 2020 10:06:06 +0530</pubDate>
+      
+      <guid>/projects/nimbus2018/</guid>
+      <description>Nimbus2018 is a minesweeper bot.
+   Lightning talk at PyCon India 2018
+Screen recording of the bot in action
+At the top of the leaderboard.
+Link to source
+Nimbus 2018 is a bot that solves minesweeper. It was written in python. It uses PyAutoGui for screen capture, and mouse movements.</description>
+    </item>
+    
+    <item>
+      <title>a bit about me</title>
+      <link>/about/</link>
+      <pubDate>Fri, 17 Jan 2020 21:56:37 +0530</pubDate>
+      
+      <guid>/about/</guid>
+      <description>I&#39;m Samarth. Or Sam. Or chapliboy.
+I like building things.
+Yup.</description>
+    </item>
+    
+    <item>
+      <title>Adventures in Adding Responsiveness to a Web App</title>
+      <link>/posts/responsive/</link>
+      <pubDate>Fri, 17 Jan 2020 21:56:37 +0530</pubDate>
+      
+      <guid>/posts/responsive/</guid>
+      <description>The first rule of responsive web design is often shouted off the rooftops.
+Design for mobile first. Always mobile first. I know this rule. I&#39;ve heard it several times. I&#39;ve been rudely awoken from my sleep because of all the rooftop screaming. So what do you think I did when I was building my web based crossword app? I didn&#39;t even bother considering for mobile..
+Maybe I am a rebel. Or maybe I just didn&#39;t have enough faith in my ability to actually see a project through, and rather than getting stuck in the quagmire of figuring what exactly it means to design for mobile first, I decided I&#39;d rather just dive in, and figure out all those other things along the way.</description>
+    </item>
+    
+    <item>
+      <title>Minesweeper. Another Love Story</title>
+      <link>/posts/minesweeper/</link>
+      <pubDate>Sat, 15 Sep 2018 21:15:36 +0530</pubDate>
+      
+      <guid>/posts/minesweeper/</guid>
+      <description>Originally published on Medium
+Her face was bathed in white light as she leaned closer to the monitor. “If this is a 1, then one of these two must be a mine…” she thought aloud, her fingers touching the screen.
+“And if you look at this tile…” he gently prodded.
+“This must be the mine!” she shrieked, her face now glowing brighter than the monitor.
+She was playing minesweeper. And she was loving it.</description>
+    </item>
+    
+  </channel>
+</rss>

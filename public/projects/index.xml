@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on chapliboy</title>
+    <link>/projects/</link>
+    <description>Recent content in Projects on chapliboy</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 18 Jan 2020 10:06:06 +0530</lastBuildDate>
+    
+	<atom:link href="/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>cluegrid</title>
+      <link>/projects/cluegrid/</link>
+      <pubDate>Sat, 18 Jan 2020 10:06:06 +0530</pubDate>
+      
+      <guid>/projects/cluegrid/</guid>
+      <description>cluegrid is a web app to solve crosswords with a friend
+Link to app
+Link to source
+cluegrid was build in elm. It uses websockets for the real time collaborative aspects.</description>
+    </item>
+    
+    <item>
+      <title>nimbus</title>
+      <link>/projects/nimbus2018/</link>
+      <pubDate>Sat, 18 Jan 2020 10:06:06 +0530</pubDate>
+      
+      <guid>/projects/nimbus2018/</guid>
+      <description>Nimbus2018 is a minesweeper bot.
+   Lightning talk at PyCon India 2018
+Screen recording of the bot in action
+At the top of the leaderboard.
+Link to source
+Nimbus 2018 is a bot that solves minesweeper. It was written in python. It uses PyAutoGui for screen capture, and mouse movements.</description>
+    </item>
+    
+  </channel>
+</rss>

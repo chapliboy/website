@@ -1,0 +1,12 @@
+{{ partial "header.html" . }}
+{{ partial "motto.html" . }}
+  <hr class="hr">
+  {{ range first 10 .Site.RegularPages }}
+    {{ if eq .Type "posts" }}
+      <div class='title mont orange'><a href={{ .Permalink }}>{{ .Title }}</a></div>
+      <div class='date'>{{ dateFormat "2 Jan, 2006" .Date }}</div>
+      {{ .Content | truncate 400 }}
+      <hr class="hr">
+    {{ end }}
+  {{ end }}
+{{ partial "footer.html" . }}

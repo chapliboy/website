@@ -1,0 +1,8 @@
+{{ partial "header.html" . }}
+  <hr class="hr">
+  {{ range .Pages }}
+      <div class='title mont orange'>{{ .Title }}</div>
+      {{ .Content }}
+      <hr class="hr">
+  {{ end }}
+{{ partial "footer.html" . }}

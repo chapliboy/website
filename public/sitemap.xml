@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-01-18T10:06:06+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/projects/cluegrid/</loc>
+    <lastmod>2020-01-18T10:06:06+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/projects/nimbus2018/</loc>
+    <lastmod>2020-01-18T10:06:06+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/projects/</loc>
+    <lastmod>2020-01-18T10:06:06+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+    <lastmod>2020-01-17T21:56:37+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/responsive/</loc>
+    <lastmod>2020-01-17T21:56:37+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2020-01-17T21:56:37+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/minesweeper/</loc>
+    <lastmod>2018-09-15T21:15:36+05:30</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+  </url>
+  
+</urlset>

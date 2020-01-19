@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Adventures in Adding Responsiveness to a Web App - chapliboy</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300|Montserrat:800|Ubuntu+Mono&display=swap" rel="stylesheet">
+  <link rel='stylesheet' type='text/css' href='/chapliboy.css'>
+  <link rel='stylesheet' type='text/css' href='/syntax.css'>
+  <style>body { padding: 0; margin: 0; }</style>
+</head>
+<body>
+  <div class='site-container'>
+    <div class='site-content'>
+      <div class='header'>
+        <a class='mont orange heading' href=/>chapliboy.</a>
+        <div class='buttons'>
+          <a class='button' href='/posts/'> posts </a>
+          <a class='button' href='/projects/'> projects </a>
+          <a class='button' href='/about/'> about </a>
+        </div>
+      </div>
+
+  <hr>
+  <div class='title mont orange'>Adventures in Adding Responsiveness to a Web App</div>
+  <div class='date'>17 Jan, 2020</div>
+  <p>The first rule of responsive web design is often shouted off the rooftops.</p>
+<h3 id="design-for-mobile-first-always-mobile-first">Design for mobile first. Always mobile first.</h3>
+<p>I know this rule. I've heard it several times. I've been rudely awoken from my sleep because of all the rooftop
+screaming. So what do you think I did when I was building
+my web based crossword app? I didn't even bother <em>considering for mobile.</em>.</p>
+<p>Maybe I am a rebel. Or maybe I just didn't have enough faith in my ability to
+actually see a project through, and rather than getting stuck in the quagmire of
+figuring what <em>exactly</em> it means to design for mobile first, I decided I'd
+rather just dive in, and figure out all those other things along the way.</p>
+<p>I ended up actually reaching a place where I can not only consider the application
+finished, but a place where I can also be a little proud of it,
+and maybe even want to show it off a little. But honestly, I know that if it
+doesn't work on mobile, it might as well not work at all&hellip;
+So now, here I find myself in the unenviable position of trying to have to
+figure out how exactly I am going to add responsiveness for an application that
+was basically written to be a bespoke desktop based experience. <strong>Fun</strong>.</p>
+<details style='background-color: #ffffff09;'>
+  <summary style='opacity: 0.6; padding-left: 2rem;'>tldr (spoilers?)</summary>
+    <ul>
+        <li> Some html boilerplate exists for a reason. </li>
+        <li> Css media queries are your friend. </li>
+        <ul><li> screen-width based media queries serve one purpose, and input based
+media queries serve another. Please consider what that means for your app. </li></ul>
+        <li> <code>keydown</code> events don't work as expected on mobile. </li>
+        <li> Apple implements features <em>differently</em>. </li>
+        <li> Just design for mobile first... Maybe. </li>
+    </ul>
+    <hr>
+</details>
+<hr>
+<h1 id="cluegrid">cluegrid</h1>
+<p>So what is cluegrid? Cluegrid is a way to solve crosswords with a friend. It
+allows you to pick a puzzle, share it with a friend, and then solve it together.
+There are some cool tech features like web sockets for live updates, but for the
+most part, it's a fairly simple focused crossword application.</p>
+<p><img src="/cluegrid/desktop-1.png" alt="cluegrid on desktop">
+<br></br></p>
+<p>Hey! The app looks quite good (if I can say so myself), but I am yet to see
+how it looks like on a mobile screen. Also, over the course of building the
+application, I had taken several decisions that might come back to bite me
+now&hellip; More on that later, first, let's get a look at those screenshots.</p>
+<br>
+<div class='flex-center'>
+<img src='/cluegrid/mobile-1.png' alt='mobile1' width='300'/>
+</div>
+<h3 id="bleurgh">Bleurgh&hellip;</h3>
+<p>Okay what exactly is happening here? What's with all the white? What
+happened to my beautiful gradient? Why isn't the <code>container</code> covering the entire
+width of the app? I'm sure I've set some <code>100vh</code>s and <code>100vw</code>s somewhere or the
+other&hellip; Why is this all happening?</p>
+<p>Okay, let's take this one step at a time. This is all just a bunch of CSS. I can
+handle it right? So let's see. The background is white&hellip; Maybe I should just
+move the linear-gradient to my <code>body</code> element? That ought to work.</p>
+<br>
+<div class='flex-center'>
+<img src='/cluegrid/mobile-2.png' alt='mobile2' width='300'/>
+</div>
+<p>Umm. That's really not what I was hoping for. I mean, I specifically said
+<code>100vw</code>. Clearly my definition of <code>100vw</code> isn't the same
+as my phone's definition of <code>100vw</code>. Why could that be?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">  &lt;<span style="color:#f92672">meta</span> <span style="color:#a6e22e">content</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;width=device-width, initial-scale=1&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;viewport&#34;</span> /&gt;</code></pre></div>
+<p>Have you ever seen this bad boy floating around all the HTML boilerplates? I
+sure have. I had never bothered to really figure out what it was all about.
+Turns out it was exactly what I was looking for. What was happening was that my
+phone was setting <code>100vw</code> correctly, but then, on noticing that there were
+elements outside the width of the screen, it was also zooming out so as to
+include all the other elements. Adding the above line to my html atleast let me
+maintain my sanity.</p>
+<br>
+<div class='flex-center'>
+<img src='/cluegrid/mobile-2.5.png' alt='yeah... I cheated on this image. I
+dont have a screenshot with the width set correctly and everythin else not
+working... sue me' width='300'/>
+</div>
+<p>It's still a mess, but it's a <em>predictable, scrollable</em> mess. Now we're in
+business. Now I'm going to have to start making some layout changes. But I don't
+that to affect my beautiful desktop layout.</p>
+<h3 id="css-media-queries-to-the-rescue">CSS <code>@media</code> queries to the rescue.</h3>
+<p>CSS media queries allow you to define different CSS attributes depending on
+various media factors. Since we're trying to add support for mobile devices,
+there are different media queries that we could use. If I'd really bothered to
+do proper research, I would have discovered that there are two approaches
+that could work for me, though for quite different reasons.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">    <span style="color:#75715e">/* based on screen width */</span>
+    @<span style="color:#66d9ef">media</span> <span style="color:#f92672">screen</span> <span style="color:#f92672">and</span> <span style="color:#f92672">(</span><span style="color:#f92672">max-width</span><span style="color:#f92672">:</span> <span style="color:#f92672">699px</span><span style="color:#f92672">)</span> 
+
+    <span style="color:#75715e">/* based on input type */</span>
+    @<span style="color:#66d9ef">media</span> <span style="color:#f92672">only</span> <span style="color:#f92672">screen</span> <span style="color:#f92672">and</span> <span style="color:#f92672">(</span><span style="color:#f92672">hover</span>:<span style="color:#a6e22e">none</span><span style="color:#f92672">)</span>
+    @<span style="color:#66d9ef">media</span> <span style="color:#f92672">only</span> <span style="color:#f92672">screen</span> <span style="color:#f92672">and</span> <span style="color:#f92672">(</span><span style="color:#f92672">pointer</span>:<span style="color:#a6e22e">coarse</span><span style="color:#f92672">)</span></code></pre></div>
+<p>I didn't really do the research required at this stage <sup>(or any stage really&hellip;)</sup>
+and just went ahead with the <code>(max-width)</code> based query because it looked
+familiar from some CSS frameworks I had used before. Jumping ahead without
+further consideration at this point is again something that will come back to
+bite me in the future. But lets move ahead now.</p>
+<p>Now that I can set different styles for a narrow screen, I go ahead and edit the
+layout. Luckily I was using flexboxes everywhere, so the layout changes aren't
+too complicated. Just have to add one <code>flex-direction: column;</code>, and the clues
+will appear below the grid.</p>
+<br>
+<div class='flex-center'>
+<img src='/cluegrid/mobile-3.png' alt='mobile3' width='300'/>
+</div>
+<p>Umm. Yeah. I was using <code>vh</code> to set the size of each cell in the grid, because in
+the landscape layout, height is the limiting factor. Luckily I was using CSS
+variables, and I just had to redefine my <code>--cell-size</code>, and all my
+<code>var(--cell-size)</code> elements would automatically update. CSS variables are magic.</p>
+<br>
+<div class='flex-center'>
+<img src='/cluegrid/mobile-5.png' alt='mobile5' width='300'/>
+</div>
+<p>Great. I'm all done.
+Now I have a perfectly usable crossword app for mobile.
+Cool let's give it a whirl.</p>
+<h3 id="oh-wait-something-is-wrong-oh-no-oh-no-no-no">Oh wait. Something is wrong. Oh no. Oh no no no.</h3>
+<hr>
+<h1 id="the-big-architectural-design-sin">the big architectural design sin</h1>
+<p>As I was working on the application, there were several times I had to make critical
+decisions that fundamentally affected the design and architecture of the
+application. Ofcourse, every time I made them, I didn't even think about how it
+would work on mobile. As you have probably already predicted, this really came
+back to bite.</p>
+<h2 id="handling-inputs">Handling Inputs&hellip;</h2>
+<p>Since we <em>&ldquo;always&rdquo;</em> have a keyboard on hand, let's just listen for <code>keydown</code>
+events. I'm sure it'll be easier to make that look good than to style input
+elements.</p>
+<p>On mobile, I have <em>no way</em> of even making entries into the crossword. The
+keyboard doesn't even open. What use is a crossword that you cannot even fill?
+So I guess we're not done. We're not nearly done.</p>
+<p>Luckily mobile devices still emit <code>onclick</code> events. So I can detect when a cell
+or a clue is clicked. Now I only have to figure out how to open up the keyboard
+when this is clicked. A quick <sup>(and therefore not thorough)</sup> search
+revealed that if an application is focused on an input field, the keyboard
+should automatically open. So yeah, it's simple. I will create an invisible
+input field, and whenever the user clicks on an element, I can then use
+javascript to <code>focus()</code> on my invisible input and then the keyboard will
+automatically open. Then that keyboard will emit the requisite <code>keydown</code>
+events, and all of my problems will be solved.</p>
+<br>
+<div class='flex-center'>
+<img src='/cluegrid/mobile-4.png' alt='mobile4' width='300'/>
+</div>
+<p>Okay, the styling is a little off, but atleast the keyboard is present. Okay,
+now let's see how this works&hellip; No? It still doesn't work? Okay what now?</p>
+<p>So I
+don't really know what the issue is even now, but what my &ldquo;investigation&rdquo;
+revealed is that <code>keydown</code> events are fired, but they don't resemble the events
+we see on desktop. Instead of nice predictable <code>KeyC</code> and <code>KeyG</code> <code>event.code</code>s, we
+get weird <code>=Unidentified code=</code>s&hellip;</p>
+<h3 id="keydown-events-are-wierd"><code>keydown</code> events are wierd</h3>
+<div class='flex-around'>
+<div><img src='/cluegrid/desktop-keypress.png' alt='desktop-keydown' width='400'/><br>Desktop</div>
+<div><img src='/cluegrid/mobile-keypress.png' alt='mobile-keydown'
+width='300'/><br>Mobile</div>
+</div>
+<p><em>NOTE: This is the one thing I really didn't follow up on. I
+don't know if I'm doing something wrong, but I just found a solution and went
+ahead with that. If you know what I can do different so solve it, <a href='https://github.com/chapliboy/cluegrid/issues/1' target='_blank'>please let me know&hellip;</a> (<a href='https://javascript.info/keyboard-events'
+target='_blank'>Link to online keycode viewer</a>)</em></p>
+<p>As I always do, rather than necessarily solving the problem itself, I just found
+my way around it. I mean, I already created an input field right? The inputs are
+surely going into that. Let's just use that. So I write some quick and dirty
+code to check the latest character typed. I also realised that I had to support
+the user pressing backspace multiple times&hellip; Yeah, let's just put in some
+placeholder to start off, and then if the length is reduced, we know that it was
+backspace, otherwise we can just simulate a <code>keydown</code>.</p>
+<details style='background-color: #ffffff09;'>
+  <summary style='opacity: 0.6; padding-left: 2rem;'>Some code samples and interesting events in
+coming up with the same.</summary>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">initialString</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;000000000&#39;</span>
+  <span style="color:#a6e22e">fakeInputElement</span>.<span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">initialString</span>
+  <span style="color:#a6e22e">fakeInputElement</span>.<span style="color:#a6e22e">focus</span>();
+  <span style="color:#a6e22e">fakeInputElement</span>.<span style="color:#a6e22e">oninput</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">newString</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">fakeInputElement</span>.<span style="color:#a6e22e">value</span>;
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">newString</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">initialString</span>.<span style="color:#a6e22e">length</span>) {
+      <span style="color:#75715e">// User has typed something
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">character</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">newString</span>[<span style="color:#a6e22e">newString</span>.<span style="color:#a6e22e">length</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>].<span style="color:#a6e22e">toUpperCase</span>();
+      <span style="color:#75715e">// Let&#39;s make sure it&#39;s not an emoji or something...
+</span><span style="color:#75715e"></span>      <span style="color:#66d9ef">if</span> ((<span style="color:#a6e22e">character</span> <span style="color:#f92672">&gt;=</span> <span style="color:#e6db74">&#34;A&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">character</span> <span style="color:#f92672">&lt;=</span> <span style="color:#e6db74">&#34;Z&#34;</span>)) {
+        <span style="color:#a6e22e">manuallyTriggerKeyDown</span>(<span style="color:#e6db74">&#34;Key&#34;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">character</span>)
+      }
+    } <span style="color:#66d9ef">else</span> {
+      <span style="color:#75715e">// User has backspaced something
+</span><span style="color:#75715e"></span>      <span style="color:#a6e22e">manuallyTriggerKeyDown</span>(<span style="color:#e6db74">&#34;Backspace&#34;</span>)
+    }
+    <span style="color:#a6e22e">initialString</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">newString</span>
+  }
+</code></pre></div>
+<div class='flex-center'>
+<img src='/cluegrid/mobile-8.png' alt='mobile8' width='300'/>
+</div>
+<p> When I used spaces for the entry string instead of zeroes, some weird things
+happen when trying to use backspace. Does anyone know what this <a href='https://github.com/chapliboy/cluegrid/issues/2' target='_blank'>sfmo thing</a> is? I
+couldn't find any references.</p>
+<br>
+<div class='flex-center'>
+<img src='/cluegrid/mobile-9.png' alt='mobile9' width='300'/>
+</div>
+<p> When I used 'a' for the entry string, android tried to help by
+autocompleting... I wonder if anyone at Google was very concerned for my
+safety...</p>
+</details>
+<h3 id="okay-are-we-done-now">Okay. Are we done now?</h3>
+<p>I mean&hellip; It works. But is it really responsive? It's really hard to use. It's
+kinda ugly too. And I have come this far. Let's just redesign the whole thing to
+make it actually nice to use? Alright. Great idea. Let's do it. So we just have
+to make a new screen open so that users can easily enter the clues answers.
+Maybe add some extra buttons there as well. Yeah could be nice.
+<br></p>
+<div class='flex-center'>
+<img src='/cluegrid/mobile-13.png' alt='mobile13' width='300'/>
+</div>
+<p>Maybe we can also clean up the page itself. Why scroll down to view the clues.
+We should be able to come up with a slightly cleaner UX.
+<br></p>
+<div class='flex-around'>
+<img src='/cluegrid/mobile-10.png' alt='mobile10' width='300'/>
+<img src='/cluegrid/mobile-11.png' alt='mobile11' width='300'/>
+</div>
+<p>Well, that certainly looks a lot better than before. Maybe even borderline
+usable. I think I'm happy with the way that looks. Our tale hasn't ended yet
+though. My office has a couple of iPads, and I thought it would be interesting to see
+how my app looks like on them.</p>
+<h3 id="ipad---where-it-all-comes-back-to-bite">iPad - where it all comes back to bite.</h3>
+<p>Remember how we set our media query to check the width of the application? Well,
+the ipad certainly isn't narrower than <code>699px</code>. So the app renders as the desktop
+version on ipad. So again, we can't make any inputs. We can change to css media
+queries to the input based ones, but then we lose all the benefits of the large
+ipad screen, and cannot simultaneously see the clues and the grid.</p>
+<p>Also, remember how we were using the <code>focus()</code> on our fake input element? Yeah,
+iOs doesn't allow us to do that&hellip; So for the most part the application is
+completely unusable on iOS devices. Unless you just want the answers to the
+clues (for which the <code>SOLVE CLUES</code> button still functions.)</p>
+<p>At this point, I had two options.</p>
+<p><strong>Option 1</strong>: Break up the CSS into multiple sets of media queries. One for the
+screen width, and one for the touch screen support. Additionally, re-architect
+the entire app to use an input element for each box in the crossword, and hope
+that iOS supports that. Resign yourself to the fact that the experience is
+always going to be sub-par on mobile devices.</p>
+<p><strong>Option 2</strong>:</p>
+<div class='flex-center'>
+<img src='/cluegrid/mobile-14.png' alt='mobile14' width='600'/>
+</div>
+<h1 id="conclusions">conclusions</h1>
+<p>So after this whole adventure, I think it's clear what the takeaways <em>should</em>
+be&hellip;</p>
+<ol>
+<li>Always design for mobile first.</li>
+<li>Thoroughly research all options before implementation.</li>
+<li>Keep in mind the intricacies of the different platforms that you are
+targetting.</li>
+</ol>
+<h3 id="yeah-no-thanks">Yeah&hellip; No thanks.</h3>
+<p>Honestly, this whole application for me was just an excuse to learn
+<a href='https://elm-lang.org' target='_blank'>elm</a>. It was just meant to be
+a fun exercise and I sure had fun building it. If you are working on some
+professional project, then yeah, sure, do all of the above. But when ypu're
+building to learn, or building for fun, that's not the most important thing. Do
+the things that give you the best chance for actually completing the project.
+Even if these things come back and bite you, atleast you have a great story for
+your blog.</p>
+<p><a href='https://cluegrid.chapliboy.com' target='_blank'>Link to the cluegrid
+app</a>. <sup>You probably don't want to open it on mobile. ‾\_(ツ)_/‾</sup></p>
+<h3 id="build-stuff-break-things-have-fun">Build stuff. Break things. Have fun.</h3>
+
+  <hr>
+      <div class='footer-container'>
+        <div class='footer'>
+          <a href='https://github.com/chapliboy/' target='_blank'>github</a>
+          <div> built with <a href='https://gohugo.io/' target='_blank'>hugo</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

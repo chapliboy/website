@@ -1,0 +1,144 @@
+body {
+  background-color: #252530;
+  color: #fff;
+}
+.site-container {
+  font-size: 1.1rem;
+  display: flex;
+  width: calc(100%-3rem);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-family: 'Merriweather', serif;
+  line-height: 1.7;
+  justify-content: center;
+  --orange: #fc9d7d;
+}
+.site-content {
+  min-height: 100vh;
+  max-width: 780px;
+  width: 100%;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.header .logo {
+  width: 360px;
+}
+.header .buttons {
+  display: flex;
+  align-items: center;
+}
+.header .button {
+  font-size: 1.4rem;
+  font-family: 'Montserrat', 'Roboto', sans-serif;
+  font-weight: 800;
+  padding: .4rem;
+  color: #eeeeee;
+  text-decoration: none;
+}
+.orange {
+  color: var(--orange);
+}
+.center {
+  text-align: center;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+}
+.mont {
+  font-family: 'Montserrat', 'Roboto', sans-serif;
+}
+.heading {
+  font-size: 4rem;
+  text-decoration: none;
+}
+
+.motto {
+  text-align: center;
+  line-height: 1;
+  padding-top: 1rem;
+  font-size: 1.3rem;
+}
+
+.author {
+  padding-top: .3rem;
+  text-align: center;
+  font-size: .7rem;
+}
+hr {
+  border: 1px solid #fc9d7d44;
+  width: 60%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+a {
+  color: var(--orange);
+}
+
+.title {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+h1 {
+  color: var(--orange);
+  font-family: 'Montserrat', 'Roboto', sans-serif;
+}
+
+h2 {
+  color: var(--orange);
+  font-family: 'Montserrat', 'Roboto', sans-serif;
+}
+h3 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+img {
+  max-width: 100%;
+}
+code {
+  font-size: 1rem;
+  background-color: #ffffff19;
+  color: #fff;
+}
+pre code {
+  background-color: #ffffff00;
+  line-height: 1;
+}
+
+.footer-container {
+  position: relative;
+  max-width: 800px;
+  width: 100%;
+  bottom: 0;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  padding-bottom: 3rem;
+}
+.date {
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+@media only screen and (max-width: 700px) {
+  .header {
+    justify-content: center;
+  }
+  .header .button {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
